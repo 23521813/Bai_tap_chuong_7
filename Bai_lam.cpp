@@ -1,6 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <string>
+#include<bits/stdc++.h>
+
 using namespace std;
 
 // Lớp cơ sở NhanVien
@@ -68,7 +67,7 @@ public:
 
 // Chương trình chính
 int main() {
-    vector<NhanVien*> danhSachNhanVien;
+    vector<NhanVien*> ds;
     int luaChon;
     // Nhập danh sách nhân viên
     do {
@@ -86,7 +85,7 @@ int main() {
             cout << "Nhap so ngay lam viec: "; cin >> Songaylamviec;
             cout << "Nhap tro cap: "; cin >> Trocap;
 
-            danhSachNhanVien.push_back(new NhanVienVanPhong(Hoten, Ngaysinh, Luongcoban, Songaylamviec, Trocap));
+            ds.push_back(new NhanVienVanPhong(Hoten, Ngaysinh, Luongcoban, Songaylamviec, Trocap));
         } else if (luaChon == 2) {
             string Hoten, Ngaysinh;
             float Luongcoban;
@@ -97,7 +96,7 @@ int main() {
             cout << "Nhap luong co ban: "; cin >> Luongcoban;
             cout << "Nhap so san pham: "; cin >> Sosanpham;
 
-            danhSachNhanVien.push_back(new NhanVienSanXuat(Hoten, Ngaysinh, Luongcoban, Sosanpham));
+            ds.push_back(new NhanVienSanXuat(Hoten, Ngaysinh, Luongcoban, Sosanpham));
         } else if (luaChon == 3) {
             string Hoten, Ngaysinh;
             float Luongcoban, Hesochucvu, Thuong;
@@ -108,13 +107,13 @@ int main() {
             cout << "Nhap he so chuc vu: "; cin >> Hesochucvu;
             cout << "Nhap Thuong: "; cin >> Thuong;
 
-            danhSachNhanVien.push_back(new NhanVienQuanLy(Hoten, Ngaysinh, Luongcoban, Hesochucvu, Thuong));
+            ds.push_back(new NhanVienQuanLy(Hoten, Ngaysinh, Luongcoban, Hesochucvu, Thuong));
         }
     } while (luaChon);
     // Xuất thông tin của các nhân viên và tính tổng lương công ty
     float tongLuong = 0;
     cout << "\nDanh sach nhan vien:\n";
-    for (const auto& nv : danhSachNhanVien) {
+    for (const auto& nv : ds) {
         nv->xuatThongTin();
         tongLuong += nv->tinhLuong();
     }
@@ -125,7 +124,7 @@ int main() {
     cin.ignore();
     getline(cin, tenTimKiem);
     bool timThay = false;
-    for (const auto& nv : danhSachNhanVien) {
+    for (const auto& nv : ds) {
         if (nv->getHoten() == tenTimKiem) {
             cout << "Thong tin nhan vien tim thay:\n";
             nv->xuatThongTin();
